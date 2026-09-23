@@ -13,7 +13,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "GitHub",
 			icon: "fa7-brands:github",
-			url: "https://github.com/2806606884",
+			url: "https://github.com/xmasling",
 		},
 	],
 };

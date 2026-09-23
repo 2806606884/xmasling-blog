@@ -141,7 +141,7 @@ export const navBarConfig: NavBarConfig = {
 			children: [
 				{
 					name: "GitHub",
-					url: "https://github.com/2806606884",
+					url: "https://github.com/xmasling",
 					external: true, // 外部链接，新标签页打开
 					icon: "fa7-brands:github",
 				},
@@ -158,11 +158,6 @@ export const navBarConfig: NavBarConfig = {
 					name: "关于我",
 					url: "/about/",
 					icon: "material-symbols:person",
-				},
-				{
-					name: "友情链接",
-					url: "/friends/",
-					icon: "material-symbols:group",
 				},
 			],
 		},

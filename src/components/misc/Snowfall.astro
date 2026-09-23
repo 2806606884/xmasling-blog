@@ -1,0 +1,57 @@
+---
+// Stable positions avoid a layout jump on navigation while keeping the flakes varied.
+const flakes = Array.from({ length: 32 }, (_, index) => ({
+	crystal: index % 4 === 0,
+	left: `${(index * 37 + 11) % 100}%`,
+	size: `${index % 5 === 0 ? 8 : index % 3 === 0 ? 5 : 3}px`,
+	duration: `${12 + (index * 7) % 13}s`,
+	delay: `${-((index * 11) % 22)}s`,
+	drift: `${(index % 2 === 0 ? 1 : -1) * (22 + (index * 13) % 68)}px`,
+	opacity: String(0.45 + (index % 4) * 0.12),
+}));
+---
+
+<div class="snowfall" aria-hidden="true">
+	{flakes.map((flake) => (
+		<span class:list={["snowflake", { crystal: flake.crystal }]} style={`--left:${flake.left};--size:${flake.size};--duration:${flake.duration};--delay:${flake.delay};--drift:${flake.drift};--opacity:${flake.opacity}`}>{flake.crystal ? "❄" : ""}</span>
+	))}
+</div>
+
+<style>
+	.snowfall {
+		position: fixed;
+		inset: 0;
+		z-index: 45;
+		pointer-events: none;
+		overflow: hidden;
+	}
+	.snowflake {
+		position: absolute;
+		top: -12px;
+		left: var(--left);
+		width: var(--size);
+		height: var(--size);
+		border-radius: 50%;
+		background: white;
+		box-shadow: 0 0 3px rgb(70 80 90 / 48%);
+		opacity: var(--opacity);
+		animation: snowfall var(--duration) linear var(--delay) infinite;
+	}
+	.snowflake.crystal {
+		width: auto;
+		height: auto;
+		border-radius: 0;
+		background: none;
+		color: white;
+		font-size: 13px;
+		line-height: 1;
+		text-shadow: 0 0 3px rgb(70 80 90 / 50%);
+		box-shadow: none;
+	}
+	@keyframes snowfall {
+		to { transform: translate3d(var(--drift), 105vh, 0); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.snowfall { display: none; }
+	}
+</style>

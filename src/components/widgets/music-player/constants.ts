@@ -1,16 +1,26 @@
-import clCover from "../../../assets/music/cover/cl.webp?url";
-import dazbeeCover from "../../../assets/music/cover/dazbee.webp?url";
-import hitoriCover from "../../../assets/music/cover/hitori.webp?url";
-import xryxCover from "../../../assets/music/cover/xryx.webp?url";
+// 暂时隐藏的四首歌及其封面保留在下方注释中，需要恢复时取消注释。
+// import clCover from "../../../assets/music/cover/cl.webp?url";
+// import dazbeeCover from "../../../assets/music/cover/dazbee.webp?url";
+// import hitoriCover from "../../../assets/music/cover/hitori.webp?url";
+// import xryxCover from "../../../assets/music/cover/xryx.webp?url";
 import type { Song } from "./types";
 
 export const STORAGE_KEY_VOLUME = "music-player-volume";
 
 export const DEFAULT_VOLUME = 0.7;
 
-export const DEFAULT_COVER_URL = "/favicon/favicon.ico";
+export const DEFAULT_COVER_URL = "/assets/home/ling-avatar.jpg";
 
 export const LOCAL_PLAYLIST: Song[] = [
+	{
+		id: 5,
+		title: "好想爱这个世界啊",
+		artist: "华晨宇",
+		cover: "/assets/music/cover/hua-chenyu-hao-xiang-ai-zhe-ge-shi-jie-a.jpg",
+		url: "assets/music/url/hua-chenyu-hao-xiang-ai-zhe-ge-shi-jie-a.mp3",
+		duration: 0,
+	},
+	/* 暂时隐藏，歌曲信息和文件均保留：
 	{
 		id: 1,
 		title: "口笛で愛は歌えない",
@@ -43,6 +53,7 @@ export const LOCAL_PLAYLIST: Song[] = [
 		url: "assets/music/url/cl.mp3",
 		duration: 242,
 	},
+	*/
 ];
 
 export const DEFAULT_SONG: Song = {

@@ -48,8 +48,11 @@ const normalizeToArray = (images: string | string[]): string[] =>
 
 const desktopImages = normalizeToArray(bannerImages.desktop).filter(Boolean);
 const mobileImages = normalizeToArray(bannerImages.mobile).filter(Boolean);
+const bannerVideo = siteConfig.banner.video;
+const isVideoEnabled = bannerVideo?.enable && Boolean(bannerVideo.src);
 
 const isCarouselEnabled =
+	!isVideoEnabled &&
 	siteConfig.banner.carousel?.enable &&
 	(desktopImages.length > 1 || mobileImages.length > 1);
 
@@ -81,7 +84,21 @@ const bannerFormats = getImageFormats();
 	class={`absolute z-10 w-full transition duration-700 overflow-hidden ${mobileNonHomeBannerClass}`}
 	style={`top: -${BANNER_HEIGHT_EXTEND}vh`}
 >
-	{isCarouselEnabled ? (
+	{isVideoEnabled ? (
+		<div id="banner-video-container" class="relative h-full w-full bg-black">
+			<video
+				id="banner-video"
+				class="h-full w-full object-cover"
+				src={bannerVideo?.src}
+				poster={bannerVideo?.poster}
+				autoplay
+				muted
+				loop={bannerVideo?.loop ?? true}
+				playsinline
+				preload="auto"
+			></video>
+		</div>
+	) : isCarouselEnabled ? (
 		/* 轮播图模式：Ken Burns + Crossfade */
 		<div
 			id="banner-carousel"
@@ -229,6 +246,38 @@ const bannerFormats = getImageFormats();
 				})();
 			</script>
 		</div>
+	)}
+
+	{isVideoEnabled && (
+		<script is:inline data-swup-ignore-script>
+			(function initBannerVideo() {
+				function startCurrentVideo() {
+					var video = document.getElementById('banner-video');
+					if (!video) return;
+					var playPromise = video.play();
+					if (playPromise) playPromise.catch(function () {});
+				}
+
+				startCurrentVideo();
+
+				if (!window.__bannerVideoSoundHandler) {
+					window.__bannerVideoSoundHandler = function (event) {
+						var button = event.target.closest && event.target.closest('#banner-sound-toggle');
+						if (!button) return;
+						var video = document.getElementById('banner-video');
+						if (!video) return;
+
+						video.muted = !video.muted;
+						video.volume = 1;
+						if (video.paused) video.play().catch(function () {});
+						button.setAttribute('aria-pressed', String(!video.muted));
+						button.setAttribute('aria-label', video.muted ? '开启视频声音' : '关闭视频声音');
+						button.textContent = video.muted ? '🔊 开启声音' : '🔇 关闭声音';
+					};
+					document.addEventListener('click', window.__bannerVideoSoundHandler);
+				}
+			})();
+		</script>
 	)}
 
 	<!-- Ken Burns 动画样式（放在 body 中，不受 Swup head 替换影响） -->
@@ -596,7 +645,7 @@ const bannerFormats = getImageFormats();
 
 	<!-- 首页文字覆盖层 -->
 	{siteConfig.banner.homeText?.enable && (
-		<div class={`banner-text-overlay absolute inset-0 z-20 flex items-center justify-center ${!showTextOverlay ? "hidden" : ""}`}>
+		<div class={`banner-text-overlay pointer-events-none absolute inset-0 z-20 flex items-center justify-center ${!showTextOverlay ? "hidden" : ""}`}>
 			<div class="w-4/5 lg:w-3/4 text-center mb-0">
 				<div class="flex flex-col">
 					{overlayTitle && (
@@ -651,7 +700,7 @@ const bannerFormats = getImageFormats();
 	<!-- 水波纹效果 -->
 	{showWave && (
 		<div
-			class="waves absolute -bottom-px h-[10vh] max-h-37.5 min-h-12.5 w-full md:h-[15vh]"
+			class="waves pointer-events-none absolute -bottom-px h-[10vh] max-h-37.5 min-h-12.5 w-full md:h-[15vh]"
 			id="header-waves"
 			style="transform: translateZ(0); will-change: fill;"
 		>

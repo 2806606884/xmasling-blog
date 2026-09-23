@@ -2,6 +2,7 @@
 import { Font } from "astro:assets";
 import { PageProgressBar } from "@components/control/PageProgressBar";
 import Pio from "@components/features/pio/Pio.astro";
+import Snowfall from "@components/misc/Snowfall.astro";
 import ConfigCarrier from "@components/misc/ConfigCarrier.astro";
 import MusicPlayer from "@components/widgets/music-player/MusicPlayer.svelte";
 import CodeGroupManager from "@/components/features/markdown/CodeGroupManager.astro";
@@ -246,6 +247,7 @@ const bannerOffset =
 			duration={siteConfig.pageProgressBar?.duration ?? 8000}
 		/>
 		<slot />
+		<Snowfall />
 
 		<!-- Music Player - 核心始终加载（当enable=true），UI通过showFloatingPlayer控制 -->
 		<MusicPlayer client:idle />

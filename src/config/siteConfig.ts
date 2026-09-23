@@ -4,8 +4,8 @@ import type { SiteConfig } from "../types/config";
 const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 
 export const siteConfig: SiteConfig = {
-	title: "Ling",
-	subtitle: "记录学习、项目与生活",
+	title: "Blog-Ling",
+	subtitle: "",
 	siteURL: "https://xmasling.com/", // 请替换为你的站点URL，以斜杠结尾
 	siteStartDate: "2026-09-22", // 站点开始运行日期，用于站点统计组件计算运行天数
 	timeZone: "Asia/Shanghai", // 文章日期使用的 IANA 时区，可改为 Asia/Tokyo、Europe/Berlin 等
@@ -13,8 +13,8 @@ export const siteConfig: SiteConfig = {
 	lang: SITE_LANG,
 
 	themeColor: {
-		hue: 198, // 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		fixed: false, // 对访问者隐藏主题色选择器
+		hue: 0, // 灰白主题不依赖色相
+		fixed: true, // 固定灰白配色
 	},
 
 	// 特色页面开关配置（关闭未使用的页面有助于提升 SEO，关闭后请记得在 navbarConfig 中移除对应链接）
@@ -37,7 +37,7 @@ export const siteConfig: SiteConfig = {
 		// 顶栏标题文本
 		text: "Ling‘s blog",
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.webp
-		icon: "assets/home/home.webp",
+		icon: "assets/home/ling-avatar.jpg",
 		// 网站Logo图片路径
 		logo: "assets/home/default-logo.webp",
 	},
@@ -120,6 +120,14 @@ export const siteConfig: SiteConfig = {
 	},
 
 	banner: {
+		// 视频开启时优先显示视频；关闭 enable 后会自动恢复下方原有图片轮播。
+		video: {
+			enable: true,
+			src: "/assets/video/ling-banner-compressed.mp4",
+			poster: "/assets/desktop-banner/1.webp",
+			loop: true,
+		},
+
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
@@ -139,7 +147,7 @@ export const siteConfig: SiteConfig = {
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
 		carousel: {
-			enable: true,
+			enable: false,
 			interval: 3,
 			switchable: true,
 		},
@@ -162,13 +170,12 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true,
-			title: "Ling",
+			title: "Perhaps the world was meant to be loved slowly.",
 			switchable: true,
 
 			subtitle: [
-				"记录学习、项目与生活",
-				"把走过的路，慢慢写成自己的故事",
-				"保持好奇，也保持热爱",
+				"把走过的路 慢慢写成自己的故事",
+				"没人看见的坚持 更安静更锋利",
 			],
 			typewriter: {
 				enable: true, // 启用副标题打字机效果
@@ -201,12 +208,9 @@ export const siteConfig: SiteConfig = {
 	showCoverInContent: true, // 在文章内容页显示文章封面
 	generateOgImages: false, // 启用生成OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	favicon: [
-		// 留空以使用默认 favicon
-		// {
-		//   src: '/favicon/icon.png',    // 图标文件路径
-		//   theme: 'light',              // 可选，指定主题 'light' | 'dark'
-		//   sizes: '32x32',              // 可选，图标大小
-		// }
+		{
+			src: "/assets/home/ling-avatar.jpg",
+		},
 	],
 
 	showLastModified: true, // 控制"上次编辑"卡片显示的开关

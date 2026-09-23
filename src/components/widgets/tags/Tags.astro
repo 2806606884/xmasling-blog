@@ -1,13 +1,18 @@
 ---
 import I18nKey from "../../../i18n/i18nKey";
 import { i18n } from "../../../i18n/translation";
+import { pinnedTags } from "../../../config/tagConfig";
 import { getTagList } from "../../../utils/content-utils";
 import { getTagUrl } from "../../../utils/url-utils";
 import { widgetManager } from "../../../utils/widget-manager";
 import ButtonTag from "../../control/ButtonTag.astro";
 import WidgetLayout from "../common/WidgetLayout.astro";
 
-const tags = await getTagList();
+const postTags = await getTagList();
+const tags = [
+	...pinnedTags,
+	...postTags.map((tag) => tag.name),
+].filter((tag, index, allTags) => allTags.indexOf(tag) === index);
 
 const COLLAPSED_HEIGHT = "7.5rem";
 
@@ -37,12 +42,12 @@ const style = Astro.props.style;
 >
 	<div class="flex gap-2 flex-wrap">
 		{
-			tags.map((t) => (
+		tags.map((tag) => (
 				<ButtonTag
-					href={getTagUrl(t.name)}
-					label={`View all posts with the ${t.name.trim()} tag`}
+					href={getTagUrl(tag)}
+					label={`View all posts with the ${tag.trim()} tag`}
 				>
-					{t.name.trim()}
+					{tag.trim()}
 				</ButtonTag>
 			))
 		}

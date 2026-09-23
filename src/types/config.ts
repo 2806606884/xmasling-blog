@@ -113,6 +113,12 @@ export interface SiteConfig {
 	};
 
 	banner: {
+		video?: {
+			enable: boolean;
+			src: string;
+			poster?: string;
+			loop?: boolean;
+		};
 		src:
 			| string
 			| string[]
