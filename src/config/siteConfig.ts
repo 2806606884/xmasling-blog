@@ -124,7 +124,6 @@ export const siteConfig: SiteConfig = {
 		video: {
 			enable: true,
 			src: "/assets/video/ling-banner-compressed.mp4",
-			poster: "/assets/desktop-banner/1.webp",
 			loop: true,
 		},
 
