@@ -20,6 +20,14 @@ export const LOCAL_PLAYLIST: Song[] = [
 		url: "assets/music/url/hua-chenyu-hao-xiang-ai-zhe-ge-shi-jie-a.mp3",
 		duration: 0,
 	},
+	{
+		id: 6,
+		title: "1／4日记",
+		artist: "瘪,津静公路No.26（Prod.汪澍烨）",
+		cover: DEFAULT_COVER_URL,
+		url: "assets/music/url/bie-jin-jing-gong-lu-no-26-1-4-riji.mp3",
+		duration: 0,
+	},
 	/* 暂时隐藏，歌曲信息和文件均保留：
 	{
 		id: 1,
